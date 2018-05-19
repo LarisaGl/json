@@ -2,53 +2,47 @@
     $quest='http://api.openweathermap.org/data/2.5/weather?q=Rostov-na-Donu,ru&appid=f3d4855cbacbc20a8845e49073b854df';
     $resp=file_get_contents($quest);
     $json=json_decode($resp, true);
-
-    echo "<pre>";
-    print_r($json);
-    echo "</pre>";
 ?>
 
 <table>
-	<?php foreach ($json as $value) { ?>
 	<tr>		
-		<td><?php echo "City name";?></td>
-		<td><?php print_r($value[name]);?></td>
-	</tr>
-	<?php foreach ($value as $weather) { ?>
-	<?php foreach ($weather as $description) { ?>
-	<tr>		
-		<td><?php echo "Today:";?></td>
-		<td><?php print_r($description[main]);?></td>
-	</tr>
-	<?php } ?>
-	<?php } ?>
-	<?php foreach ($value as $main) { ?>
-	<tr>		
-		<td><?php echo "Temperature:";?></td>
-		<td><?php print_r($main[temp]);?></td>
+		<td><img src="http://www.iconsearch.ru/uploads/icons/aquanox/128x128/globe.png"></td>
+		<td><b><?php echo "City name:";?></b></td>
+		<td><?php echo $json['name'];?></td>
 	</tr>
 	<tr>
-		<td><?php echo "Humidity:";?></td>
-		<td><?php print_r($main[humidity]);?></td>
+		<td><img src="http://remont-kraski.ru/images/services/services4/remont6/2.png"></td>		
+		<td><b><?php echo "Temperature:";?></b></td>
+		<td><?php echo $json['main']['temp'];?></td>
 	</tr>
 	<tr>
-		<td><?php echo "Minimum temperature at the moment:";?></td>
-		<td><?php print_r($main[temp_min]);?></td>
+		<td><img src="http://icdn.pro/images/es/t/i/tiempo-sol-nube-icono-9235-128.png"></td>		
+		<td><b><?php echo "Today:";?></b></td>
+		<td><?php echo $json['weather']['0']['main'];?></td>
 	</tr>
 	<tr>
-		<td><?php echo "Maximum temperature at the moment:";?></td>
-		<td><?php print_r($main[temp_max]);?></td>
-	</tr>
-	<?php } ?>
-	<?php foreach ($value as $wind) { ?>
-	<tr>	
-		<td><?php echo "Wind speed";?></td>
-		<td><?php print_r($wind[speed]);?></td>
+		<td><img src="https://images.freeimages.com/images/premium/large-thumbs/2622/26221249-water-drop.jpg"></td>
+		<td><b><?php echo "Humidity:";?></b></td>
+		<td><?php echo $json['main']['humidity'];?></td>
 	</tr>
 	<tr>
-		<td><?php echo "Wind direction";?></td>
-		<td><?php print_r($wind[deg]);?></td>
+		<td><img src="http://www.lotusite.ru/images/userfiles/images/i(33).jpeg"></td>
+		<td><b><?php echo "Minimum temperature at the moment:";?></b></td>
+		<td><?php echo $json['main']['temp_min'];?></td>
 	</tr>
-	<?php } ?>
-	<?php } ?>
+	<tr>
+		<td><img src="http://www.lotusite.ru/images/userfiles/images/i(33).jpeg"></td>
+		<td><b><?php echo "Maximum temperature at the moment:";?></b></td>
+		<td><?php echo $json['main']['temp_max'];?></td>
+	</tr>	
+	<tr>
+		<td><img src="https://st2.depositphotos.com/3557671/9239/v/170/depositphotos_92394144-stock-illustration-wind-generator-icon-on-white.jpg"></td>	
+		<td><b><?php echo "Wind speed";?></b></td>
+		<td><?php echo $json['wind']['speed'];?></td>
+	</tr>
+	<tr>
+		<td><img src="http://s1.iconbird.com/ico/0612/VistaStyleWeatherIconsSet/w256h2561339359708WindFlagStorm.png"></td>
+		<td><b><?php echo "Wind direction";?></b></td>
+		<td><?php echo $json['wind']['deg'];?></td>
+	</tr>
 </table>
